@@ -2,6 +2,7 @@ package tn.esprit.autolocapi.domain;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,4 +29,21 @@ public class Reservation {
 
     @Enumerated(EnumType.STRING)
     private StatutReservation statut;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "client_id", referencedColumnName = "idClient", nullable = false)
+    private Client client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehicule_id", referencedColumnName = "idVehicule", nullable = false)
+    private Vehicule vehicule;
+
+    @OneToOne(mappedBy = "reservation", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Contrat contrat;
+
+    public void setContratAssocie(Contrat c) {
+        this.contrat = c;
+        if (c != null) c.setReservation(this);
+    }
 }
