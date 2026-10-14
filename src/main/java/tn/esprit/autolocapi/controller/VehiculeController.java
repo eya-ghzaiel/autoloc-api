@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@RequestMapping("/vehicule")
 public class VehiculeController {
     private final IVehiculeService VehiculeService;
     @PostMapping("/ajouterVehicule")
@@ -33,5 +34,7 @@ public class VehiculeController {
     }
 
 }
+
+
 
 
