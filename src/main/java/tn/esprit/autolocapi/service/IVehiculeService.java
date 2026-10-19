@@ -5,9 +5,9 @@ import tn.esprit.autolocapi.domain.Vehicule;
 import java.util.List;
 
 public interface IVehiculeService {
-  public Vehicule ajouterVehicule(Vehicule v);
-  public Vehicule modifierVehicule(Vehicule v);
-  public Vehicule getVehiculeById(Long id);
-  public List<Vehicule> getAllVehicules();
-  public void supprimerVehicule(Long id);
+  Vehicule ajouterVehicule(Vehicule v);
+  Vehicule modifierVehicule(Vehicule v);
+  Vehicule getVehiculeById(Long id);
+  List<Vehicule> getAllVehicules();
+  void supprimerVehicule(Long id);
 }
