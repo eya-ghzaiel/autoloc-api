@@ -35,7 +35,7 @@ public class Vehicule {
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "agence_id", referencedColumnName = "idAgence", nullable = false)
+    @JoinColumn(name = "agence_id", referencedColumnName = "idAgence")
     private Agence agence;
 
     @OneToMany(mappedBy = "vehicule", fetch = FetchType.LAZY,
@@ -57,23 +57,5 @@ public class Vehicule {
     )
     private List<Equipement> equipements = new ArrayList<>();
 
-    public void addMaintenance(Maintenance m) {
-        maintenances.add(m);
-        m.setVehicule(this);
-    }
 
-    public void removeMaintenance(Maintenance m) {
-        maintenances.remove(m);   // orphanRemoval : la maintenance est supprimée de la base
-        m.setVehicule(null);
-    }
-
-    public void addEquipement(Equipement e) {
-        equipements.add(e);
-        e.getVehicules().add(this);
-    }
-
-    public void removeEquipement(Equipement e) {
-        equipements.remove(e);    // supprime seulement la ligne dans vehicule_equipement
-        e.getVehicules().remove(this);
-    }
 }
