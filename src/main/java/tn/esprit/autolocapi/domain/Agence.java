@@ -18,7 +18,7 @@ public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAgence ;
-    @Column(nullable = false , length = 50)
+    @Column(length = 50)
     private String nom  ;
     @Column(nullable = false , length = 50)
     private String ville ;

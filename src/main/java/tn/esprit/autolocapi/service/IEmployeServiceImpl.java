@@ -2,8 +2,11 @@ package tn.esprit.autolocapi.service;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import tn.esprit.autolocapi.domain.Agence;
 import tn.esprit.autolocapi.domain.Employe;
 import tn.esprit.autolocapi.repository.EmployeRepository;
+import tn.esprit.autolocapi.repository.AgenceRepository;
+
 
 import java.util.List;
 
@@ -12,6 +15,7 @@ import java.util.List;
 public class IEmployeServiceImpl implements IEmployeService {
 
     private final EmployeRepository employeRepository;
+    private final AgenceRepository agenceRepository;
 
     @Override
     public Employe ajouterEmploye(Employe e) {
@@ -37,4 +41,20 @@ public class IEmployeServiceImpl implements IEmployeService {
     public void supprimerEmploye(Long id) {
         employeRepository.deleteById(id);
     }
+
+    @Override
+    public Employe desaffecterEmploye(Long id) {
+        Employe e = employeRepository.findById(id).get();
+        e.setAgence(null);
+        return employeRepository.save(e);
+    }
+
+    @Override
+    public Employe affecterEmploye(Long id, Long idAgence) {
+        Employe e = employeRepository.findById(id).get();
+        Agence a = agenceRepository.findById(idAgence).get();
+        e.setAgence(a);
+        return employeRepository.save(e);
+    }
+
 }
